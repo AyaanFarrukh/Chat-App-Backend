@@ -238,6 +238,8 @@ io.on("connection", (socket) => {
   })
 });
 
+app.use("/api", router);
+
 connectDB().then(() => {
   console.log("db is running!")
   server.listen(PORT, () => {
@@ -245,4 +247,3 @@ connectDB().then(() => {
   });
 })
 
-app.use("/api", router);

@@ -4,7 +4,8 @@ import { Users } from "../models/UserModel.mjs";
 async function UpdateUserDetails(request,response) {
     try {
         console.log("here i am")
-        const token = request.cookies.token || "";
+        const authHeader = request.headers["authorization"];
+        const token = authHeader && authHeader.split(" ")[1];
         console.log(token);
         const user = await GetUserDetailsWithToken(token);
         if(!user) return response.status(401).send({ success: false, loggedIn: false });

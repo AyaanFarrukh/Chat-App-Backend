@@ -1,8 +1,10 @@
 import GetUserDetailsWithToken from "../helpers/UserDetailsToken.mjs";
+import jwt from "jsonwebtoken";
 
 async function GetUserDetails(request,response) {
     try {
-        const token = request.cookies.token || "";
+        const authHeader = request.headers["authorization"]; 
+        const token = authHeader && authHeader.split(" ")[1];
         const userData = await GetUserDetailsWithToken(token);
         console.log("userdata", userData);
         if(!userData) return response.status(400).send({ success: false , token: false });
